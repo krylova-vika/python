@@ -60,6 +60,10 @@ def contact_search(phone: str, json_data: dict) -> int:
             break
     return index_contact
 
+def save_data_to_file(json_data: dict) -> None:
+    contact_file = open("../different_files/contacts.json", mode="w", encoding="utf-8")
+    json.dump(json_data, contact_file, indent=4, ensure_ascii=False)
+    contact_file.close()
 
 while choise_action in ["1", "2", "3", "4"]:
     # для выбора действия
@@ -100,12 +104,8 @@ while choise_action in ["1", "2", "3", "4"]:
                             # Добавляем в наш словарь
                             json_data["contacts"].append({"phone":phone, "name":name, "lastname":lastname, "comment":comment})
 
-                            #открываем файл на запись
                             #сохраняем контакт в файл
-                            contact_file = open("../different_files/contacts.json", mode="w", encoding="utf-8")
-                            json.dump(json_data, contact_file, indent=4, ensure_ascii=False)
-                            #закрываем файл
-                            contact_file.close()
+                            save_data_to_file(json_data)
 
                             print("Контакт создан")
                         valid_name = False #для повторного использования для изменений
@@ -170,11 +170,7 @@ while choise_action in ["1", "2", "3", "4"]:
                             json_data["contacts"][index_contact]["comment"] = comment_change
 
                         #записываем в сам файл
-                        contact_file = open("../different_files/contacts.json", mode = "w", encoding = "utf-8")
-                        json.dump(json_data, contact_file, indent = 4, ensure_ascii = False)
-
-                        # закрываем файл
-                        contact_file.close()
+                        save_data_to_file(json_data)
                         print("Контакт изменен")
                 elif category_changes == "0":
                     category_changes = "1"
@@ -206,10 +202,7 @@ while choise_action in ["1", "2", "3", "4"]:
                     if category_changes == "1":
                         del json_data["contacts"][index_contact]
                         #применяем изменения в самом файле
-                        contact_file = open("../different_files/contacts.json", mode="w", encoding="utf-8")
-                        json.dump(json_data, contact_file, indent=4, ensure_ascii=False)
-                        # закрываем файл
-                        contact_file.close()
+                        save_data_to_file(json_data)
 
                         print("Контакт удален")
     elif choise_action == "0":
