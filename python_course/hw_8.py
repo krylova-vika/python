@@ -71,6 +71,7 @@ while choise_action in ["1", "2", "3", "4"]:
                           "Для создания контакта наберите - 1\n"
                           "Для изменения контакта наберите - 2\n"
                           "Для удаления контакта наберите -3\n"
+                          "Показать все контакты - 4\n"
                           "Выйти - 0\n")
     if choise_action in ["1", "2", "3"]:
         phone = input("Введите номер телефона: ").replace(" ", "")
@@ -205,6 +206,16 @@ while choise_action in ["1", "2", "3", "4"]:
                         save_data_to_file(json_data)
 
                         print("Контакт удален")
+
+    elif choise_action == "4":
+        json_data = get_data_from_file()
+        for i in range(len(json_data["contacts"])):
+            print(f"Телефон: {json_data["contacts"][i]["phone"]}\n"
+                  f"Имя: {json_data["contacts"][i]["name"]}\n"
+                  f"Фамилия: {json_data["contacts"][i]["lastname"]}\n"
+                  f"Комментарий: {json_data["contacts"][i]["comment"]}\n"
+                  "\n")
+
     elif choise_action == "0":
         pass
     else:
