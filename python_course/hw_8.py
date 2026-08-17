@@ -65,7 +65,6 @@ def save_data_to_file(json_data: dict) -> None:
     json.dump(json_data, contact_file, indent=4, ensure_ascii=False)
     contact_file.close()
 
-
 while choise_action in ["1", "2", "3", "4"]:
     # для выбора действия
     choise_action = input("Главное меню:\n"
